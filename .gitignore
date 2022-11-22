@@ -28,4 +28,9 @@ coverage/
 *.sublime-workspace
 
 # IDE - VSCode
-.vscode/
+.vscode/*
+!.vscode/extensions.json
+
+# App
+docs/
+*.tsbuildinfo
