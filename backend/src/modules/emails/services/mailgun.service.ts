@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config'
 import * as formData from 'form-data'
 import Mailgun from 'mailgun.js'
 import { MessagesSendResult } from 'mailgun.js/interfaces/Messages'
-import { MailBodyDto } from '@/modules/emails/dto'
+import { MailBodyDto, EmailsDto } from '@/modules/emails/dto'
 
 @Injectable()
 export class MailgunService {
@@ -11,25 +11,35 @@ export class MailgunService {
 
   constructor(private readonly config: ConfigService) {}
 
-  public async sendMail(mailBody: MailBodyDto): Promise<MessagesSendResult> {
-    const mailgun = new Mailgun(formData)
+  public async sendMail(mailBody: MailBodyDto): Promise<EmailsDto> {
     const DOMAIN = this.config.get<string>('MAILGUN_DOMAIN')
     const API_KEY = this.config.get<string>('MAILGUN_API_KEY')
-    const client = mailgun.client({ username: 'api', key: API_KEY })
 
     try {
-      const messagesSendResult = await client.messages.create(DOMAIN, {
+      const mailgun = new Mailgun(formData)
+      const client = mailgun.client({ username: 'api', key: API_KEY })
+
+      const messagesSendResult: MessagesSendResult = await client.messages.create(DOMAIN, {
         from: mailBody?.from || `mailgun@${DOMAIN}`,
         to: mailBody.to,
-        subject: mailBody.subject,
-        text: mailBody.message
+        subject: mailBody.subject.trim(),
+        text: mailBody.message.trim()
       })
+      const { status, message, id } = messagesSendResult
 
-      return messagesSendResult
+      return {
+        serviceName: MailgunService.name,
+        mailSended: status === 200,
+        id: id.split('@')[0].substring(1),
+        status,
+        message
+      }
     } catch (error) {
       const errorMessage = (error as Error).message
       this.loggerMailgun.error(errorMessage)
+
       return {
+        mailSended: false,
         status: 500,
         message: errorMessage
       }

@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common'
 import { ApiProperty, ApiTags, ApiOkResponse } from '@nestjs/swagger'
-import { MailgunService } from './services/mailgun.service'
+import { EmailsService } from './services/emails.service'
 import { MailBodyDto, EmailsDto } from '@/modules/emails/dto'
 import { ResponseDto } from '@/common/dto'
 
@@ -12,26 +12,26 @@ class EmailResponse extends ResponseDto<EmailsDto> {
 @ApiTags('Emails')
 @Controller('api/emails')
 export class EmailsController {
-  constructor(private readonly mailgunService: MailgunService) {}
+  constructor(private readonly emailsService: EmailsService) {}
 
   @Post('/send_mail')
   @ApiOkResponse({ type: EmailResponse })
   async sendMail(@Body() mailBody: MailBodyDto): Promise<EmailResponse> {
-    const { status, message } = await this.mailgunService.sendMail(mailBody)
+    const data = await this.emailsService.sendMailFaultTolerant(mailBody)
 
-    return status === 200
+    return data.mailSended
       ? {
           response: 'Email Sended',
-          data: {
-            status,
-            message
-          },
+          data,
           error: null
         }
       : {
           response: 'Error',
           data: null,
-          error: message
+          error: {
+            code: data.status,
+            message: data.message
+          }
         }
   }
 }

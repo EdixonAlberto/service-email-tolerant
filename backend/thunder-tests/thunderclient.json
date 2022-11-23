@@ -23,11 +23,11 @@
     "colId": "b6ac92cb-b08a-492a-bcf2-dd4bb7e82b72",
     "containerId": "",
     "name": "sendgrid",
-    "url": "https://api.sendgrid.com/api/mail.send.json?from=email@example.com&to=edixonalbertto@gmail.com&subject=Testing service to send mails&text=This is a test message ",
+    "url": "https://api.sendgrid.com/api/mail.send.json?from=email@example.com&to=edixonalbertto@gmail.com&subject=Testing service to send mails&text=This is a test message",
     "method": "POST",
     "sortNum": 10000,
     "created": "2022-11-23T05:18:19.990Z",
-    "modified": "2022-11-23T14:14:00.944Z",
+    "modified": "2022-11-23T18:29:36.275Z",
     "headers": [],
     "params": [
       {
@@ -47,7 +47,7 @@
       },
       {
         "name": "text",
-        "value": "This is a test message ",
+        "value": "This is a test message",
         "isPath": false
       }
     ],
