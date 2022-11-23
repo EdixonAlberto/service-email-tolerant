@@ -3,14 +3,101 @@
     "_id": "538098ae-30c7-4b8f-a06e-0b103c6fad6f",
     "colId": "8765c41f-64ff-4356-a92f-dd204a7f39c0",
     "containerId": "",
-    "name": "/hello",
-    "url": "{{HOST}}/api/emails/hello",
-    "method": "GET",
+    "name": "send_mail",
+    "url": "{{HOST}}/api/emails/send_mail",
+    "method": "POST",
     "sortNum": 10000,
     "created": "2022-11-22T20:49:26.218Z",
-    "modified": "2022-11-22T20:50:37.377Z",
+    "modified": "2022-11-23T16:40:39.866Z",
     "headers": [],
     "params": [],
+    "body": {
+      "type": "json",
+      "raw": "{\n  \"from\": \"test@example.com\",\n  \"to\": \"edixonalbertto@gmail.com\",\n  \"subject\": \"Testing service to send mails\",\n  \"message\": \"This is a test message\"\n}",
+      "form": []
+    },
+    "tests": []
+  },
+  {
+    "_id": "1388f081-92d5-408f-8052-3d1eaa30789e",
+    "colId": "b6ac92cb-b08a-492a-bcf2-dd4bb7e82b72",
+    "containerId": "",
+    "name": "sendgrid",
+    "url": "https://api.sendgrid.com/api/mail.send.json?from=email@example.com&to=edixonalbertto@gmail.com&subject=Testing service to send mails&text=This is a test message ",
+    "method": "POST",
+    "sortNum": 10000,
+    "created": "2022-11-23T05:18:19.990Z",
+    "modified": "2022-11-23T14:14:00.944Z",
+    "headers": [],
+    "params": [
+      {
+        "name": "from",
+        "value": "email@example.com",
+        "isPath": false
+      },
+      {
+        "name": "to",
+        "value": "edixonalbertto@gmail.com",
+        "isPath": false
+      },
+      {
+        "name": "subject",
+        "value": "Testing service to send mails",
+        "isPath": false
+      },
+      {
+        "name": "text",
+        "value": "This is a test message ",
+        "isPath": false
+      }
+    ],
+    "auth": {
+      "type": "bearer",
+      "bearer": "{{SENDGRID_API_KEY}}"
+    },
+    "tests": []
+  },
+  {
+    "_id": "bd65c713-6b59-4956-91a6-2d746e9623f7",
+    "colId": "b6ac92cb-b08a-492a-bcf2-dd4bb7e82b72",
+    "containerId": "",
+    "name": "mailgun",
+    "url": "https://api.mailgun.net/v3/{{MAILGUN_DOMAIN}}/messages",
+    "method": "POST",
+    "sortNum": 20000,
+    "created": "2022-11-23T06:13:08.506Z",
+    "modified": "2022-11-23T16:40:19.303Z",
+    "headers": [],
+    "params": [],
+    "body": {
+      "type": "formdata",
+      "raw": "",
+      "form": [
+        {
+          "name": "from",
+          "value": "email@example.com"
+        },
+        {
+          "name": "to",
+          "value": "edixonalbertto@gmail.com"
+        },
+        {
+          "name": "subject",
+          "value": "Testing service to send mails"
+        },
+        {
+          "name": "text",
+          "value": "This is a test message"
+        }
+      ]
+    },
+    "auth": {
+      "type": "basic",
+      "basic": {
+        "username": "api",
+        "password": "{{MAILGUN_API_KEY}}"
+      }
+    },
     "tests": []
   }
 ]

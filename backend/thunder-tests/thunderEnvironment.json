@@ -2,7 +2,7 @@
   {
     "_id": "836c7410-553a-4dac-a0f8-f27f69e5f5dd",
     "name": "PROD",
-    "default": true,
+    "default": false,
     "sortNum": 10000,
     "created": "2022-11-22T20:49:31.331Z",
     "modified": "2022-11-22T20:50:05.957Z",
@@ -16,15 +16,26 @@
   {
     "_id": "13cc93f7-e03c-411c-8e33-dcd8d3c42736",
     "name": "DEV",
-    "default": false,
+    "default": true,
     "sortNum": 15000,
     "created": "2022-11-22T20:49:35.243Z",
-    "modified": "2022-11-22T20:49:55.206Z",
+    "modified": "2022-11-23T14:41:35.609Z",
     "data": [
       {
         "name": "HOST",
         "value": "http://localhost:3000"
       }
     ]
+  },
+  {
+    "_id": "7c33ef3c-4a73-42b5-8947-005d49d4bd63",
+    "name": "(Local Env)",
+    "default": false,
+    "global": true,
+    "local": true,
+    "sortNum": -1,
+    "created": "2022-11-23T14:09:19.306Z",
+    "modified": "2022-11-23T14:09:19.306Z",
+    "data": []
   }
 ]
