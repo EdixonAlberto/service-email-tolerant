@@ -16,15 +16,22 @@ jobs:
 
     steps:
       - name: Checkout
-        id:
+        id: checkout
         uses: actions/checkout@v2
 
       - name: Authenticate to GCP
         id: auth
         uses: google-github-actions/auth@v1
         with:
-          workload_identity_provider: ${{ secrets.WIP_PROVIDER_NAME }}
+          create_credentials_file: true
+          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.APPENGINE_SA_EMAIL }}
+
+      - id: gcloud
+        name: Gcloud
+        run: |-
+          gcloud auth login --brief --quiet --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
+          gcloud services list
 
       - name: Deploy to Google AppEngine
         id: deploy
@@ -35,4 +42,4 @@ jobs:
           project_id: ${{ secrets.GCP_PROJECT }}
 
       - name: show output
-          run: echo ${{ steps.deploy.outputs.url }}
+        run: echo "${{ steps.deploy.outputs.url }}"
