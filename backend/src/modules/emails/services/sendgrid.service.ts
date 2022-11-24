@@ -1,8 +1,8 @@
-import { MailBodyDto, EmailsDto } from '@/modules/emails/dto'
 import { Injectable, Logger } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import * as sgMail from '@sendgrid/mail'
 import { ClientResponse } from '@sendgrid/mail'
+import { MailBodyDto, EmailsDto } from '@/modules/emails/dto'
 
 @Injectable()
 export class SendgridService {

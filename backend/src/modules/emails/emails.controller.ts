@@ -1,13 +1,7 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common'
-import { ApiProperty, ApiTags, ApiOkResponse } from '@nestjs/swagger'
+import { ApiTags, ApiOkResponse } from '@nestjs/swagger'
 import { EmailsService } from './services/emails.service'
-import { MailBodyDto, EmailsDto } from '@/modules/emails/dto'
-import { ResponseDto } from '@/common/dto'
-
-class EmailResponse extends ResponseDto<EmailsDto> {
-  @ApiProperty({ type: EmailsDto })
-  data: EmailsDto
-}
+import { MailBodyDto, EmailResponse } from './dto'
 
 @ApiTags('Emails')
 @Controller('api/emails')

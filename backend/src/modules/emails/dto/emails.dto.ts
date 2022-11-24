@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger'
+import { ResponseDto } from '@/common/dto'
 
 export class EmailsDto {
   @ApiProperty()
@@ -15,4 +16,9 @@ export class EmailsDto {
 
   @ApiProperty()
   readonly message: string
+}
+
+export class EmailResponse extends ResponseDto<EmailsDto> {
+  @ApiProperty({ type: EmailsDto })
+  data: EmailsDto
 }

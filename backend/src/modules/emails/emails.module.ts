@@ -5,7 +5,6 @@ import { MailgunService } from './services/mailgun.service'
 import { SendgridService } from './services/sendgrid.service'
 
 @Module({
-  imports: [],
   controllers: [EmailsController],
   providers: [EmailsService, MailgunService, SendgridService]
 })
