@@ -20,7 +20,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "deploy": "gh-pages -o origin -d ./dist"
   },
   "dependencies": {
     "vue": "^3.2.41",

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { TMail } from '../@types'
 
 const responseCode = ref<object>({})
 const loading = ref<boolean>(false)
@@ -20,12 +21,11 @@ async function handlerSubmit(evt: any): Promise<void> {
   loading.value = true
   const sendedMail = await sendMail(mail)
   if (sendedMail) evt.reset()
-  loading.value = false
 }
 
 async function sendMail(mailBody: TMail): Promise<boolean> {
   try {
-    const response = await fetch('http://localhost:3000/api/emails/send_mail', {
+    const response = await fetch('https://challenge-chiper.ue.r.appspot.com/api/emails/send_mail', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -34,6 +34,8 @@ async function sendMail(mailBody: TMail): Promise<boolean> {
     })
 
     const data = await response.json()
+
+    loading.value = false
     responseCode.value = data
     return true
   } catch (error) {
@@ -70,7 +72,7 @@ async function sendMail(mailBody: TMail): Promise<boolean> {
           </div>
 
           <div class="ch-input">
-            <label for="to">to</label>
+            <label for="to">To</label>
             <input type="text" name="to" placeholder="email@example.com" :disabled="loading" />
           </div>
 
@@ -110,10 +112,10 @@ async function sendMail(mailBody: TMail): Promise<boolean> {
 <style lang="scss" scoped>
 $color-background: #f5f7f9;
 $color-white: #fff;
-$color-green-light: #3d8f5f;
-$color-green-black: #2a6f47;
-$color-font: #75828e;
+$color-green: #3d8f5f;
+$color-green-dark: #2a6f47;
 $color-grey: #dbe1e6;
+$color-grey-dark: #75828e;
 
 .app {
   width: 100vw;
@@ -146,7 +148,7 @@ $color-grey: #dbe1e6;
         margin: 10px 0;
         font-size: 32px;
         font-weight: 600;
-        color: $color-green-light;
+        color: $color-green;
       }
 
       p {
@@ -174,6 +176,8 @@ $color-grey: #dbe1e6;
         row-gap: 10px;
 
         background: $color-white;
+        border-radius: 4px;
+        box-shadow: 0px 5px 20px -7px $color-grey-dark;
 
         .ch-input,
         input,
@@ -198,7 +202,7 @@ $color-grey: #dbe1e6;
           textarea {
             padding: 15px 20px;
 
-            color: $color-font;
+            color: $color-grey-dark;
             background: $color-white;
             border: 2px solid $color-grey;
             border-radius: 5px;
@@ -209,7 +213,7 @@ $color-grey: #dbe1e6;
             }
 
             &:focus-visible {
-              border: 2px solid $color-green-light;
+              border: 2px solid $color-green;
             }
           }
 
@@ -230,7 +234,7 @@ $color-grey: #dbe1e6;
           justify-content: center;
 
           text-align: center;
-          background: $color-green-light;
+          background: $color-green;
           border: none;
           border-radius: 5px;
           outline: none;
@@ -241,14 +245,14 @@ $color-grey: #dbe1e6;
 
           &.loading::before {
             content: '';
-            height: 30px;
-            width: 30px;
+            height: 20px;
+            width: 20px;
             margin: auto;
 
             position: absolute;
             top: 0;
             bottom: 0;
-            right: 100px;
+            right: 80px;
 
             border: 3.5px solid $color-white;
             border-top-color: transparent;
@@ -268,7 +272,7 @@ $color-grey: #dbe1e6;
 
           &:hover,
           &:disabled {
-            background: $color-green-black;
+            background: $color-green-dark;
           }
 
           &:disabled {
@@ -282,7 +286,9 @@ $color-grey: #dbe1e6;
         height: 100%;
         padding: 20px;
 
-        background: $color-green-light;
+        background: $color-green;
+        border-radius: 4px;
+        box-shadow: 0px 5px 20px -7px $color-grey-dark;
 
         .output,
         pre {

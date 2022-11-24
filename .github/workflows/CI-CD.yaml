@@ -6,7 +6,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy
+    name: CI Backend
 
     permissions:
       contents: read
@@ -19,6 +19,24 @@ jobs:
         id: checkout
         uses: actions/checkout@v2
 
+      - name: Linter Backend
+        run: |
+          cd backend
+          yarn install
+          yarn lint
+
+      - name: Build Backend
+        run: |
+          cd backend
+          yarn install
+          yarn build
+
+      - name: Test Backend
+        run: |
+          cd backend
+          yarn install
+          yarn test
+
       - name: Authenticate to GCP
         id: auth
         uses: google-github-actions/auth@v1
@@ -27,12 +45,13 @@ jobs:
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.APPENGINE_SA_EMAIL }}
 
-      - name: Gcloud
-        id: gcloud
-        run: |-
-          gcloud auth login --brief --quiet --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
-          gcloud services list
+      # - name: Gcloud
+      #   id: gcloud
+      #   run: |-
+      #     gcloud auth login --brief --quiet --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
+      #     gcloud services list
 
+      #  TODO: deploy
       # - name: Deploy to Google AppEngine
       #   id: deploy
       #   uses: google-github-actions/deploy-appengine@v1

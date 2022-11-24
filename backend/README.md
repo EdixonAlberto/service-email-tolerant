@@ -4,11 +4,9 @@
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
 </p>
 
-## Description
-
 Service fault-tolerant to sending emails.
 
-### Api Public &#x279c; [https://challenge-chiper.ue.r.appspot.com/api/docs](https://challenge-chiper.ue.r.appspot.com/api/docs)
+### Api Public &#x279c; [https://challenge-chiper.ue.r.appspot.com/api/docs/](https://challenge-chiper.ue.r.appspot.com/api/docs/)
 
 ## Started
 

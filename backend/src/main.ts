@@ -22,7 +22,7 @@ async function bootstrap() {
     customSiteTitle: 'Docs - Service Email'
   })
 
-  app.enableCors()
+  app.enableCors({ origin: '*' })
 
   app.useGlobalPipes(
     new ValidationPipe({

@@ -1,5 +1,5 @@
-declare type TMail = {
-  service?: 'fault-tolerant' | 'mailgun' | 'sendgrid'
+export type TMail = {
+  service?: string
   from?: string
   to: string
   subject: string

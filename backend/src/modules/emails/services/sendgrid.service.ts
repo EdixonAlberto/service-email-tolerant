@@ -18,7 +18,7 @@ export class SendgridService {
     try {
       sgMail.setApiKey(API_KEY)
 
-      const [clientResponse]: [ClientResponse, {}] = await sgMail.send({
+      const [clientResponse]: [ClientResponse, object] = await sgMail.send({
         from: mailBody?.from || `sendgrid@${DOMAIN}`,
         to: mailBody.to,
         subject: mailBody.subject.trim(),

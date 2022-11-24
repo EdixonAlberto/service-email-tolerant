@@ -24,6 +24,7 @@ coverage/
 *.tsbuildinfo
 *.log
 .*
+!.env
 nest-cli.json
 tsconfig.json
 tsconfig.build.json
