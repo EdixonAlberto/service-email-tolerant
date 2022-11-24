@@ -35,7 +35,7 @@ export class SendgridService {
       }
     } catch (error) {
       const errorMessage = (error as Error).message
-      this.loggerSendgrid.error(errorMessage)
+      if (this.config.get<TEnv>('NODE_ENV') === 'development') this.loggerSendgrid.error(errorMessage)
 
       return {
         mailSended: false,

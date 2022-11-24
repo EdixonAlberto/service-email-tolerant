@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common'
+import { Body, Controller, HttpCode, Post } from '@nestjs/common'
 import { ApiProperty, ApiTags, ApiOkResponse } from '@nestjs/swagger'
 import { EmailsService } from './services/emails.service'
 import { MailBodyDto, EmailsDto } from '@/modules/emails/dto'
@@ -15,6 +15,7 @@ export class EmailsController {
   constructor(private readonly emailsService: EmailsService) {}
 
   @Post('/send_mail')
+  @HttpCode(200)
   @ApiOkResponse({ type: EmailResponse })
   async sendMail(@Body() mailBody: MailBodyDto): Promise<EmailResponse> {
     const data = await this.emailsService.sendMailFaultTolerant(mailBody)

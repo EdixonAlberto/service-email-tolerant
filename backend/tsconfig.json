@@ -9,11 +9,10 @@
     "target": "ES2017",
     "lib": ["ES2021"],
     "sourceMap": true,
-    // "rootDir": "src",
     "outDir": "dist",
-    "baseUrl": "src",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"]
     },
     "incremental": true,
     "skipLibCheck": true,

@@ -36,7 +36,7 @@ export class MailgunService {
       }
     } catch (error) {
       const errorMessage = (error as Error).message
-      this.loggerMailgun.error(errorMessage)
+      if (this.config.get<TEnv>('NODE_ENV') === 'development') this.loggerMailgun.error(errorMessage)
 
       return {
         mailSended: false,
