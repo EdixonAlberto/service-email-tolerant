@@ -2,6 +2,8 @@
   "recommendations": [
     "rangav.vscode-thunder-client",
     "esbenp.prettier-vscode",
-    "xabikos.JavaScriptSnippets"
+    "xabikos.javascriptsnippets",
+    "vue.volar",
+    "hollowtree.vue-snippets"
   ]
 }
