@@ -22,6 +22,8 @@ async function bootstrap() {
     customSiteTitle: 'Docs - Service Email'
   })
 
+  app.enableCors()
+
   app.useGlobalPipes(
     new ValidationPipe({
       transform: true,

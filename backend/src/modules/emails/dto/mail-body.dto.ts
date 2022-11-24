@@ -1,7 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger'
-import { Matches, IsString, IsOptional, IsNotEmpty } from 'class-validator'
+import { Matches, IsString, IsOptional, IsNotEmpty, IsIn } from 'class-validator'
+
+const SERVICES = ['fault-tolerant', 'mailgun', 'sendgrid']
 
 export class MailBodyDto {
+  @ApiProperty({ required: false, enum: SERVICES, enumName: 'Services', example: 'sendgrid' })
+  @IsOptional()
+  @IsIn(SERVICES)
+  readonly service?: 'fault-tolerant' | 'mailgun' | 'sendgrid'
+
   @ApiProperty({
     required: false,
     // prettier-ignore

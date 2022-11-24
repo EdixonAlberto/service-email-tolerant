@@ -6,6 +6,7 @@ import { MailBodyDto, EmailsDto } from '@/modules/emails/dto'
 
 @Injectable()
 export class SendgridService {
+  public name = SendgridService.name
   private loggerSendgrid = new Logger(SendgridService.name)
 
   constructor(private readonly config: ConfigService) {}
@@ -27,7 +28,7 @@ export class SendgridService {
       const mailSended = statusCode === 202
 
       return {
-        serviceName: SendgridService.name,
+        serviceName: this.name,
         mailSended,
         id: mailSended ? headers['x-message-id'] : undefined,
         status: statusCode,

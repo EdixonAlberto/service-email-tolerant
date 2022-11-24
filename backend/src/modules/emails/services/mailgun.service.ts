@@ -7,6 +7,7 @@ import { MailBodyDto, EmailsDto } from '@/modules/emails/dto'
 
 @Injectable()
 export class MailgunService {
+  public name = MailgunService.name
   private loggerMailgun = new Logger(MailgunService.name)
 
   constructor(private readonly config: ConfigService) {}
@@ -28,7 +29,7 @@ export class MailgunService {
       const { status, message, id } = messagesSendResult
 
       return {
-        serviceName: MailgunService.name,
+        serviceName: this.name,
         mailSended: status === 200,
         id: id.split('@')[0].substring(1),
         status,

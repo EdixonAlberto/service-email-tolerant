@@ -3,10 +3,6 @@ import { MailBodyDto, EmailsDto } from '@/modules/emails/dto'
 import { MailgunService } from './mailgun.service'
 import { SendgridService } from './sendgrid.service'
 
-type TMailService = {
-  sendMail: (mailBody: MailBodyDto) => Promise<EmailsDto>
-}
-
 @Injectable()
 export class EmailsService {
   constructor(private readonly mailgunService: MailgunService, private readonly sendgridService: SendgridService) {}
@@ -16,7 +12,12 @@ export class EmailsService {
       this.mailgunService,
       this.sendgridService
       // add others services...
-    ]
+    ].filter(
+      service =>
+        !mailBody?.service ||
+        mailBody.service === 'fault-tolerant' ||
+        service.name.toLowerCase() === mailBody.service + 'service'
+    )
 
     let response: EmailsDto = null
 
