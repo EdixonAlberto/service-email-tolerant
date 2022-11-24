@@ -6,9 +6,10 @@ const loading = ref<boolean>(false)
 
 // METHODS _____________________________________________________________________________________________________________
 async function handlerSubmit(evt: any): Promise<void> {
-  const { from, to, subject, message } = evt.target as { [key: string]: { value: string } }
+  const { service, from, to, subject, message } = evt.target as { [key: string]: { value: string } }
 
   const mail: TMail = {
+    service: service.value,
     to: to.value.trim(),
     subject: subject.value.trim(),
     message: message.value.trim()
@@ -17,11 +18,12 @@ async function handlerSubmit(evt: any): Promise<void> {
   if (from.value) mail.from = from.value.trim()
 
   loading.value = true
-  await sendMail(mail)
+  const sendedMail = await sendMail(mail)
+  if (sendedMail) evt.reset()
   loading.value = false
 }
 
-async function sendMail(mailBody: TMail): Promise<void> {
+async function sendMail(mailBody: TMail): Promise<boolean> {
   try {
     const response = await fetch('http://localhost:3000/api/emails/send_mail', {
       method: 'POST',
@@ -33,9 +35,12 @@ async function sendMail(mailBody: TMail): Promise<void> {
 
     const data = await response.json()
     responseCode.value = data
+    return true
   } catch (error) {
-    console.error('ERROR-FETCH', (error as Error).message)
-    return
+    const errorMessage = (error as Error).message
+    console.error('ERROR-FETCH', errorMessage)
+    alert(errorMessage)
+    return false
   }
 }
 </script>
@@ -316,6 +321,7 @@ $color-grey: #dbe1e6;
 // Mobile
 @media screen and (max-width: 576px) {
   .app {
+    // TODO: add code responsive to mobile
   }
 }
 </style>
