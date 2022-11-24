@@ -1,7 +1,8 @@
 import { Body, Controller, HttpCode, Post } from '@nestjs/common'
-import { ApiTags, ApiOkResponse } from '@nestjs/swagger'
+import { ApiTags, ApiOkResponse, ApiBadRequestResponse, ApiResponse } from '@nestjs/swagger'
 import { EmailsService } from './services/emails.service'
 import { MailBodyDto, EmailResponse } from './dto'
+import { BadRequestResponse, ErrorResponse } from '@/common/dto'
 
 @ApiTags('Emails')
 @Controller('api/emails')
@@ -11,6 +12,8 @@ export class EmailsController {
   @Post('/send_mail')
   @HttpCode(200)
   @ApiOkResponse({ type: EmailResponse })
+  @ApiBadRequestResponse({ type: BadRequestResponse })
+  @ApiResponse({ type: ErrorResponse, status: 500 })
   async sendMail(@Body() mailBody: MailBodyDto): Promise<EmailResponse> {
     const data = await this.emailsService.sendMailFaultTolerant(mailBody)
 

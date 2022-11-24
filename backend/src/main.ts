@@ -1,5 +1,5 @@
 import { NestFactory } from '@nestjs/core'
-import { Logger } from '@nestjs/common'
+import { Logger, ValidationPipe } from '@nestjs/common'
 import { ConfigService } from '@nestjs/config'
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { AppModule } from './app.module'
@@ -21,6 +21,17 @@ async function bootstrap() {
   SwaggerModule.setup('api/docs', app, document, {
     customSiteTitle: 'Docs - Service Email'
   })
+
+  app.useGlobalPipes(
+    new ValidationPipe({
+      transform: true,
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transformOptions: {
+        enableImplicitConversion: true
+      }
+    })
+  )
 
   await app.listen(portHTTP, () => {
     loggerApi.log(`Server listening at "${pathMain}"`)
