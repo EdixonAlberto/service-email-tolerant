@@ -25,7 +25,7 @@ async function handlerSubmit(evt: any): Promise<void> {
 
 async function sendMail(mailBody: TMail): Promise<boolean> {
   try {
-    const response = await fetch('https://challenge-chiper.ue.r.appspot.com/api/emails/send_mail', {
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/emails/send_mail`, {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -35,7 +35,6 @@ async function sendMail(mailBody: TMail): Promise<boolean> {
 
     const data = await response.json()
 
-    loading.value = false
     responseCode.value = data
     return true
   } catch (error) {
@@ -43,6 +42,8 @@ async function sendMail(mailBody: TMail): Promise<boolean> {
     console.error('ERROR-FETCH', errorMessage)
     alert(errorMessage)
     return false
+  } finally {
+    loading.value = false
   }
 }
 </script>

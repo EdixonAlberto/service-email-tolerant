@@ -17,6 +17,7 @@
   "private": true,
   "license": "UNLICENSED",
   "type": "module",
+  "homepage": "https://edixonalberto.github.io/challenge-chiper",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc && vite build",
