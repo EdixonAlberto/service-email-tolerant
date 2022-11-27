@@ -1,12 +1,14 @@
-name: CI-CD
+name: Backend
 
 on:
   push:
-    branches: [main]
+    branches: [deploy]
+    paths-ignore:
+      - frontend
 
 jobs:
-  backend:
-    name: Backend
+  cicd:
+    name: CI-CD
 
     permissions:
       contents: read
@@ -43,11 +45,11 @@ jobs:
           workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ secrets.APPENGINE_SA_EMAIL }}
 
-      # - name: Gcloud
-      #   id: gcloud
-      #   run: |-
-      #     gcloud auth login --brief --quiet --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
-      #     gcloud services list
+      - name: Gcloud
+        id: gcloud
+        run: |-
+          gcloud auth login --brief --quiet --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
+          gcloud services list
 
       #  TODO: deploy
       # - name: Deploy to Google AppEngine
@@ -60,27 +62,3 @@ jobs:
 
       # - name: show output
       #   run: echo "${{ steps.deploy.outputs.url }}"
-
-  frontend:
-    name: Frontend
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Build
-        run: |
-          cd frontend
-          yarn install
-          yarn build
-        env:
-          VITE_API_URL: ${{ secrets.VITE_API_URL }}
-
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@releases/v3
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BRANCH: gh-pages
-          FOLDER: frontend/dist
