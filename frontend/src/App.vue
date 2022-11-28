@@ -149,7 +149,7 @@ $color-grey-dark: #75828e;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    row-gap: 30px;
+    row-gap: 20px;
 
     .content-header {
       padding: 0 100px;
@@ -164,16 +164,17 @@ $color-grey-dark: #75828e;
 
       p {
         margin: 0;
+        color: #000;
       }
     }
 
     .content-main {
       width: 100%;
-      height: 660px;
+      height: 560px;
       display: flex;
       align-items: center;
       justify-content: center;
-      column-gap: 35px;
+      column-gap: 30px;
 
       form {
         width: 50%;
@@ -211,7 +212,7 @@ $color-grey-dark: #75828e;
           input,
           select,
           textarea {
-            padding: 15px 20px;
+            padding: 14px 20px;
 
             color: $color-grey-dark;
             background: $color-white;
@@ -233,13 +234,14 @@ $color-grey-dark: #75828e;
           }
 
           textarea {
+            height: 90px;
             resize: none;
           }
         }
 
         button {
           cursor: pointer;
-          padding: 18px 40px;
+          padding: 15px 40px;
           position: relative;
           display: flex;
           justify-content: center;
@@ -252,6 +254,7 @@ $color-grey-dark: #75828e;
 
           span {
             font-size: 20px;
+            color: $color-white;
           }
 
           &.loading::before {
@@ -288,6 +291,9 @@ $color-grey-dark: #75828e;
 
           &:disabled {
             cursor: default;
+            span {
+              color: $color-grey-dark;
+            }
           }
         }
       }
@@ -347,6 +353,10 @@ $color-grey-dark: #75828e;
         form {
           padding: 40px;
           row-gap: 20px;
+
+          .ch-input textarea {
+            height: max-content;
+          }
         }
       }
     }

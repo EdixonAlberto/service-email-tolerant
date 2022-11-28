@@ -5,5 +5,7 @@ challenge presented in the repository: [chiper-inc/coding-challenge](https://git
 
 ## Projects
 
+In the "readme" file of each project you will find all the details:
+
 - Backend [Readme &#x279c;](./backend/)
 - Frontend [Readme &#x279c;](./frontend/)

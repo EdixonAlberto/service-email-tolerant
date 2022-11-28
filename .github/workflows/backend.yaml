@@ -2,9 +2,7 @@ name: Backend
 
 on:
   push:
-    branches: [deploy]
-    paths-ignore:
-      - frontend
+    branches: [backend]
 
 jobs:
   cicd:
@@ -38,18 +36,18 @@ jobs:
           yarn install
           yarn test
 
-      - name: Authenticate to GCP
-        uses: google-github-actions/auth@v1
-        with:
-          create_credentials_file: true
-          workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
-          service_account: ${{ secrets.APPENGINE_SA_EMAIL }}
+      # - name: Authenticate to GCP
+      #   uses: google-github-actions/auth@v1
+      #   with:
+      #     create_credentials_file: true
+      #     workload_identity_provider: ${{ secrets.WORKLOAD_IDENTITY_PROVIDER }}
+      #     service_account: ${{ secrets.APPENGINE_SA_EMAIL }}
 
-      - name: Gcloud
-        id: gcloud
-        run: |-
-          gcloud auth login --brief --quiet --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
-          gcloud services list
+      # - name: Gcloud
+      #   id: gcloud
+      #   run: |-
+      #     gcloud auth login --brief --quiet --cred-file="${{ steps.auth.outputs.credentials_file_path }}"
+      #     gcloud services list
 
       #  TODO: deploy
       # - name: Deploy to Google AppEngine

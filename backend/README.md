@@ -14,7 +14,6 @@ Service fault-tolerant to sending emails.
 
 ```bash
 $ cd ./backend
-
 $ yarn install
 
 # development
@@ -49,9 +48,8 @@ Create a `SENDGRID_API_KEY` logging into your [sendgrid account](https://sendgri
 
 - Testing
 
-In the [thunder-tests](./thunder-tests) folder is a request collection with all the endpoints ready to test.
-
-Test Commands:
+In the [thunder-tests](./thunder-tests) folder is a request collection with all the endpoints ready to test. In
+addition, the project is prepared with unit, e2e and coverage test, these are the respective commands:
 
 ```bash
 # unit tests
@@ -66,19 +64,18 @@ $ yarn test:cov
 
 ## Production
 
-- CI - CD
+- CI: the "Github" platform is used with the service of [Github Action](https://docs.github.com/es/actions)
 
-The "Github" platform is used with the service of [Github Action](https://docs.github.com/es/actions)
+- Pipeline: a [workflow github](../.github/workflows/backend.yaml) file was created a series of steps to review, build
+  and test the code.
 
-- Pipeline
+- Deploy: it was decided to use the "Google Cloud Platform" platform with the service of
+  [AppEngine](https://cloud.google.com/appengine) to host the mail service. You can deploy the project from local by
+  executing the following command:
 
-Created a series of pipeline steps to review, build, test, and finally deploy the source code to this
-[yaml file](../.github/workflows/CI-CD.yaml).
-
-- Deploy
-
-It was decided to use the "Google Cloud Platform" platform with the service of
-[AppEngine](https://cloud.google.com/appengine) to host the mail service.
+```bash
+$ yarn build && yarn deploy
+```
 
 > NOTA: Please note that this project was built and tested using the following technologies environment:
 
