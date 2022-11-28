@@ -12,7 +12,6 @@ SPA web app to show the operation of the fault-tolerant email delivery service.
 
 ```bash
 $ cd ./frontend
-
 $ yarn install
 
 # watch mode
@@ -24,6 +23,20 @@ $ yarn build
 # production mode
 $ yarn preview
 ```
+
+## Environment Variables
+
+Must be created un file `.env` in the root of the project "frontend", for this you can execute the following command to
+copy the provided variables template.
+
+```bash
+$ cp template.env .env
+```
+
+## Deploy
+
+In the project a [workflow of github](../.github/workflows/frontend.yaml) was created to perform a compilation by via
+**Github Actions** and automated deployment via **Github Pages**
 
 > NOTA: Please note that this project was built and tested using the following technologies environment:
 
