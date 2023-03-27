@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/challenge-chiper/',
+  base: '/service-email-tolerant/',
   plugins: [vue()],
   server: {
     host: 'localhost',
