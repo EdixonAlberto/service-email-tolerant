@@ -6,8 +6,6 @@
 
 Service fault-tolerant to sending emails.
 
-### Api Public &#x279c; [https://challenge-chiper.ue.r.appspot.com/api/docs/](https://challenge-chiper.ue.r.appspot.com/api/docs/)
-
 ## Started
 
 - Installation

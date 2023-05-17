@@ -43,3 +43,7 @@ In the project a [workflow of github](../.github/workflows/frontend.yaml) was cr
 - node v18.12.0
 - yarn v1.22.19
 - vite v3.2.4
+
+## Preview
+
+![preview](../preview.png)
